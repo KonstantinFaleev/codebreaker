@@ -1,4 +1,4 @@
-require "codebreaker/version"
+require 'codebreaker/version'
 
 module Codebreaker
   class Error < StandardError; end
