@@ -1,9 +1,17 @@
-RSpec.describe Codebreaker do
-  it 'has a version number' do
-    expect(Codebreaker::VERSION).not_to be nil
-  end
+require 'spec_helper'
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+module Codebreaker
+  RSpec.describe Codebreaker do
+    specify { expect(subject).to be_const_defined(:VERSION) }
+    specify { expect(subject).to be_const_defined(:Localization) }
+    specify { expect(subject).to be_const_defined(:Message) }
+    specify { expect(subject).to be_const_defined(:Motivation) }
+    specify { expect(subject).to be_const_defined(:UserScore) }
+    specify { expect(subject).to be_const_defined(:Storage) }
+    specify { expect(subject).to be_const_defined(:GameConst) }
+    specify { expect(subject).to be_const_defined(:Game) }
+    specify { expect(subject).to be_const_defined(:GameConfiguration) }
+    specify { expect(subject).to be_const_defined(:Score) }
+    specify { expect(subject).to be_const_defined(:Console) }
   end
 end
