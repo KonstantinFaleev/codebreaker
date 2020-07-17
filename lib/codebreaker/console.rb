@@ -106,16 +106,16 @@ module Codebreaker
       input == YES
     end
 
+    def save_game
+      print message['alerts']['save_game']
+      save_game_data if input_selector
+    end
+
     def save_game_data
       save_user_score
       prepare_storage_dir
       save_to_yml
       puts message['info']['successfully_saved'].green
-    end
-
-    def save_game
-      print message['alerts']['save_game']
-      save_game_data if input_selector
     end
 
     def new_game
@@ -129,16 +129,6 @@ module Codebreaker
       end
     end
 
-    def erase_game_data
-      begin
-        erase_data_file
-        scores.clear
-        puts message['info']['successfully_erased'].green
-      rescue
-        puts message['errors']['file_not_found'].red
-      end
-    end
-
     def exit_console
       exit
     end
@@ -148,6 +138,16 @@ module Codebreaker
         @game_config_snapshot.each_pair do |key, value|
           config[key] = value
         end
+      end
+    end
+
+    def erase_game_data
+      begin
+        erase_data_file
+        scores.clear
+        puts message['info']['successfully_erased'].green
+      rescue
+        puts message['errors']['file_not_found'].red
       end
     end
   end

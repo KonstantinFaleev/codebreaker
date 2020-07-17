@@ -8,25 +8,18 @@ module Codebreaker
 
     def apply_external_path(external_path = false)
       raise ArgumentError, 'Invalid external path.' if external_path && !Dir.exist?(external_path)
-
       yml_file = 'scores.yml'
 
-      @storage_path = if external_path
-                        "#{external_path}/#{yml_file}"
-                      else
-                        File.expand_path("./data/#{yml_file}", File.dirname(__FILE__))
-                      end
+      @storage_path =
+          if external_path
+            "#{external_path}/#{yml_file}"
+          else
+            File.expand_path("./data/#{yml_file}", File.dirname(__FILE__))
+          end
     end
 
     def load_game_data
-      YAML.safe_load(File.open(storage_path, 'r')) rescue []
-    end
-
-    def save_to_yml
-      scores_to_save = scores | load_game_data
-      File.open(storage_path, 'w') do |file|
-        file.write(YAML.dump(scores_to_save))
-      end
+      YAML.load(File.open(storage_path, 'r')) rescue []
     end
 
     def prepare_storage_dir
@@ -36,6 +29,13 @@ module Codebreaker
 
     def erase_data_file
       File.delete(storage_path)
+    end
+
+    def save_to_yml
+      scores_to_save = scores | load_game_data
+      File.open(storage_path, 'w') do |file|
+        file.write(YAML.dump(scores_to_save))
+      end
     end
   end
 end

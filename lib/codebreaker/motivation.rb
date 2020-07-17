@@ -4,7 +4,6 @@ module Codebreaker
 
     def motivation_message(msg)
       return unless message_is_allowed?
-
       msg
     end
 

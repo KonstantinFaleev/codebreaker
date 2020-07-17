@@ -277,7 +277,7 @@ module Codebreaker
           end
 
           it 'puts marked result' do
-            expect(console).to receive(:puts).with(Game::RIGHT_ANSWER * 4)
+            expect(console).to receive(:puts).with(Game::TRUE_ANSWER * 4)
           end
 
           it '#motivation_message call' do
