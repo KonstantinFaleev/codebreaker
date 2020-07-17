@@ -5,11 +5,18 @@ Style/FrozenStringLiteralComment:
 
 AllCops:
   NewCops: enable
+  Exclude:
+#    - codebreaker.gemspec
+    - spec/**/*.rb
 
 Style/Documentation:
   Enabled: false
 
-Metrics/BlockLength:
-  Exclude:
-    - codebreaker.gemspec
-    - spec/**/*.rb
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20

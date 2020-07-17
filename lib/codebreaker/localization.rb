@@ -14,6 +14,7 @@ module Codebreaker
 
     def localization
       return localizations[:en] unless localizations[lang]
+
       localizations[lang]
     end
 
@@ -27,11 +28,13 @@ module Codebreaker
       if external_path && Dir.glob("#{external_path}/*/*.yml").empty?
         raise ArgumentError, 'Invalid external path.'
       end
+
       @external_path = external_path || false
     end
 
     def localizations_dir
       return @external_path if @external_path
+
       File.expand_path('./locale/.', File.dirname(__FILE__))
     end
 
@@ -41,6 +44,7 @@ module Codebreaker
 
     def select_application(app_type)
       raise 'Unknown application type.' unless authorized_apps.include?(app_type)
+
       @app_dir = app_type.to_s
     end
 

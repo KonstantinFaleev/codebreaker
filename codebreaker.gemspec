@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require_relative 'lib/codebreaker/version'
 
@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~>3.9'
   spec.add_development_dependency 'rubocop', '~>0.85'
   spec.add_development_dependency 'rubocop-rspec', '~>1.41'
-  spec.add_development_dependency 'simplecov', '~>0.18'
   spec.add_development_dependency 'rspec_file_chef'
+  spec.add_development_dependency 'simplecov', '~>0.18'
 end

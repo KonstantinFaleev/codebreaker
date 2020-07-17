@@ -8,6 +8,7 @@ module Codebreaker
 
     def apply_external_path(external_path = false)
       raise ArgumentError, 'Invalid external path.' if external_path && !Dir.exist?(external_path)
+
       yml_file = 'scores.yml'
 
       @storage_path =
