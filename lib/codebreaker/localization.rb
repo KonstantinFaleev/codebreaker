@@ -56,7 +56,7 @@ module Codebreaker
 
     def merge_localizations
       localizations
-      loaded_ymls = candidates_to_load.map { |file| YAML.load(File.open(file, 'r')) }
+      loaded_ymls = candidates_to_load.map { |file| YAML.load_file(File.open(file, 'r')) }
       loaded_ymls.each { |loaded_yml| @localizations.update(loaded_yml) }
     end
   end

@@ -54,8 +54,8 @@ module Codebreaker
     def show_hint
       puts begin
              "#{message['alerts']['hint']}: #{game.hint.to_s.green}"
-           rescue => error
-             error.to_s.red
+           rescue StandardError => e
+             e.to_s.red
            end
     end
 
@@ -68,8 +68,8 @@ module Codebreaker
         begin
           game.guess_valid?(input)
           status = true
-        rescue => error
-          puts error.to_s.red unless step.zero? || input == HINT
+        rescue StandardError => e
+          puts e.to_s.red unless step.zero? || input == HINT
           puts "#{message['alerts']['guess']}:"
           input = gets.chomp
           step += 1
@@ -83,8 +83,8 @@ module Codebreaker
       begin
         puts game.to_guess(input)
         puts motivation_message(message['alerts']['motivation'])
-      rescue => error
-        puts error
+      rescue StandardError => e
+        puts e
         finish_game
       end
       game.won? ? finish_game : submit_answer
@@ -145,13 +145,11 @@ module Codebreaker
     end
 
     def erase_game_data
-      begin
-        erase_data_file
-        scores.clear
-        puts message['info']['successfully_erased'].green
-      rescue
-        puts message['errors']['file_not_found'].red
-      end
+      erase_data_file
+      scores.clear
+      puts message['info']['successfully_erased'].green
+    rescue StandardError
+      puts message['errors']['file_not_found'].red
     end
   end
 end

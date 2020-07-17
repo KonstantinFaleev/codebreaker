@@ -20,7 +20,9 @@ module Codebreaker
     end
 
     def load_game_data
-      YAML.load(File.open(storage_path, 'r')) rescue []
+      YAML.load_file(File.open(storage_path, 'r'))
+    rescue StandardError
+      []
     end
 
     def prepare_storage_dir

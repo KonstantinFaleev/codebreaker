@@ -62,7 +62,7 @@ module Codebreaker
 
       begin
         raise if configuration.max_attempts < 1 || configuration.max_hints.negative?
-      rescue
+      rescue StandardError
         raise message['errors']['fail_configuration_values']
       end
     end
