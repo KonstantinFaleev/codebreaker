@@ -25,9 +25,7 @@ module Codebreaker
     private
 
     def apply_external_path(external_path)
-      if external_path && Dir.glob("#{external_path}/*/*.yml").empty?
-        raise ArgumentError, 'Invalid external path.'
-      end
+      raise ArgumentError, 'Invalid external path.' if external_path && Dir.glob("#{external_path}/*/*.yml").empty?
 
       @external_path = external_path || false
     end

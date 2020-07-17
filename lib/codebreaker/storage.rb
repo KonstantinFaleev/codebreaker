@@ -12,11 +12,11 @@ module Codebreaker
       yml_file = 'scores.yml'
 
       @storage_path =
-          if external_path
-            "#{external_path}/#{yml_file}"
-          else
-            File.expand_path("./data/#{yml_file}", File.dirname(__FILE__))
-          end
+        if external_path
+          "#{external_path}/#{yml_file}"
+        else
+          File.expand_path("./data/#{yml_file}", File.dirname(__FILE__))
+        end
     end
 
     def load_game_data

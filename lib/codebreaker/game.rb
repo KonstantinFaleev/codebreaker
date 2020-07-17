@@ -57,7 +57,9 @@ module Codebreaker
     def check_configuration
       levels = [SIMPLE_LEVEL, MIDDLE_LEVEL, HARD_LEVEL]
       raise message['errors']['fail_configuration'] if configuration.any?(&:nil?)
+
       raise message['errors']['unknown_level'] unless levels.include?(configuration.level)
+
       begin
         raise if configuration.max_attempts < 1 || configuration.max_hints.negative?
       rescue
@@ -83,7 +85,8 @@ module Codebreaker
     end
 
     def fancy_algo(guess, secret_code)
-      guessed_indexes, guess = [], guess.chars.map(&:to_i)
+      guessed_indexes = []
+      guess = guess.chars.map(&:to_i)
 
       guess.each_with_index do |item, index|
         guessed_indexes << index if item == secret_code[index]
@@ -91,24 +94,26 @@ module Codebreaker
 
       guess.map.with_index do |item, index|
         not_guessed_secret_nums =
-            secret_code.reject.with_index do |_, guessed_index|
-              guessed_indexes.include?(guessed_index)
-            end
-        case
-        when item == secret_code[index] then TRUE_ANSWER
-        when not_guessed_secret_nums.include?(item) then TRUE_ANSWER_DIFF_INDEX
-        else WRONG_ANSWER
+          secret_code.reject.with_index do |_, guessed_index|
+            guessed_indexes.include?(guessed_index)
+          end
+        if item == secret_code[index]
+          TRUE_ANSWER
+        elsif not_guessed_secret_nums.include?(item)
+          TRUE_ANSWER_DIFF_INDEX
+        else
+          WRONG_ANSWER
         end
       end.join
     end
 
     def calculate_score
       level_rates =
-          case configuration.level
-          when SIMPLE_LEVEL then [TEN_POINTS, ZERO_POINTS]
-          when MIDDLE_LEVEL then [TWENTY_POINTS, TWENTY_POINTS]
-          else [FIFTY_POINTS, ONE_HUNDRED_POINTS]
-          end
+        case configuration.level
+        when SIMPLE_LEVEL then [TEN_POINTS, ZERO_POINTS]
+        when MIDDLE_LEVEL then [TWENTY_POINTS, TWENTY_POINTS]
+        else [FIFTY_POINTS, ONE_HUNDRED_POINTS]
+        end
 
       attempt_rate, hint_rate = level_rates
       guessed = result.count(TRUE_ANSWER)

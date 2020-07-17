@@ -39,6 +39,7 @@ module Codebreaker
 
     def load_console(game)
       raise ArgumentError, message['errors']['wrong_object'] unless game.is_a?(Game)
+
       @game = game
       @locale.lang = game.configuration.lang
       @game_config_snapshot = game.configuration.clone
@@ -60,7 +61,9 @@ module Codebreaker
 
     def user_interaction(input = EMPTY_INPUT)
       return if game.attempts.zero?
-      status, step = false, 0
+
+      status = false
+      step = 0
       until status
         begin
           game.guess_valid?(input)
