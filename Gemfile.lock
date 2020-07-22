@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     codebreaker (0.1.0)
+      bundler (~> 2.1)
 
 GEM
   remote: https://rubygems.org/
