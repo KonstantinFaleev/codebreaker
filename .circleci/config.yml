@@ -4,7 +4,7 @@ executors:
   default:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:2.6.3
+      - image: circleci/ruby:2.7.1
 
 caches:
   - &bundle_cache_full v1-gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}

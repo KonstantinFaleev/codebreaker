@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Codebreaker gem'
   spec.homepage      = 'https://github.com/KonstantinFaleev/codebreaker'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.6.3')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.7.1')
 
   spec.metadata['homepage_uri'] = spec.homepage
 
