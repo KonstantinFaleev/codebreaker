@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
   spec.require_paths = ['lib']
-  spec.add_dependency 'bundler', '~>2.1'
 
   spec.add_development_dependency 'fasterer', '~>0.8'
   spec.add_development_dependency 'rake', '~>13.0'
@@ -32,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~>0.85'
   spec.add_development_dependency 'rubocop-rspec', '~>1.41'
   spec.add_development_dependency 'simplecov', '~>0.18'
+  spec.add_development_dependency 'solargraph', '~>0.39'
 end
