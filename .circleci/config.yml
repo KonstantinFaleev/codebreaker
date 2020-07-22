@@ -26,11 +26,6 @@ commands:
           key: *bundle_cache_full
           paths:
             - vendor/bundle
-  run_linters:
-    steps:
-      - run:
-          name: linters
-          command: bundle exec rake lint
   run_specs:
     steps:
       - run:
