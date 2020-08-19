@@ -91,31 +91,31 @@ module Codebreaker
       guess.each_with_index do |item, index|
         guessed_indexes << index if item == secret_code[index]
       end
+      check_answer(guess, guessed_indexes)
+    end
 
+    def check_answer(guess, guessed_indexes)
       guess.map.with_index do |item, index|
-        not_guessed_secret_nums =
+        not_guessed_secret =
           secret_code.reject.with_index do |_, guessed_index|
             guessed_indexes.include?(guessed_index)
           end
-        if item == secret_code[index]
-          TRUE_ANSWER
-        elsif not_guessed_secret_nums.include?(item)
-          TRUE_ANSWER_DIFF_INDEX
-        else
-          WRONG_ANSWER
-        end
+        update_answer(item, index, not_guessed_secret)
       end.join
     end
 
-    def calculate_score
-      level_rates =
-        case configuration.level
-        when SIMPLE_LEVEL then [TEN_POINTS, ZERO_POINTS]
-        when MIDDLE_LEVEL then [TWENTY_POINTS, TWENTY_POINTS]
-        else [FIFTY_POINTS, ONE_HUNDRED_POINTS]
-        end
+    def update_answer(item, index, not_guessed_secret)
+      if item == secret_code[index]
+        TRUE_ANSWER
+      elsif not_guessed_secret.include?(item)
+        TRUE_ANSWER_DIFF_INDEX
+      else
+        WRONG_ANSWER
+      end
+    end
 
-      attempt_rate, hint_rate = level_rates
+    def calculate_score
+      attempt_rate, hint_rate = lever_rates
       guessed = result.count(TRUE_ANSWER)
 
       used_attempts = configuration.max_attempts - attempts
@@ -123,6 +123,14 @@ module Codebreaker
       bonus_points = won? && used_attempts == 1 ? BONUS_POINTS : ZERO_POINTS
 
       used_attempts * attempt_rate * guessed - used_hints * hint_rate + bonus_points
+    end
+
+    def lever_rates
+      case configuration.level
+      when SIMPLE_LEVEL then [TEN_POINTS, ZERO_POINTS]
+      when MIDDLE_LEVEL then [TWENTY_POINTS, TWENTY_POINTS]
+      else [FIFTY_POINTS, ONE_HUNDRED_POINTS]
+      end
     end
   end
 end

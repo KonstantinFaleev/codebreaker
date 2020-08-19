@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
+  spec.add_development_dependency 'colorize'
   spec.add_development_dependency 'fasterer', '~>0.8'
   spec.add_development_dependency 'lefthook', '~>0.7'
   spec.add_development_dependency 'rake', '~>13.0'
