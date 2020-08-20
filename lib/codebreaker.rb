@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'codebreaker/version'
 require_relative 'codebreaker/localization'
 require_relative 'codebreaker/message'

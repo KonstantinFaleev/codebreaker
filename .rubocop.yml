@@ -1,19 +1,16 @@
 require: rubocop-rspec
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 AllCops:
   NewCops: enable
   Exclude:
     - spec/**/*.rb
     - vendor/**/*
+    - Gemfile
+    - Rakefile
+    - bin/console
 
 Style/Documentation:
   Enabled: false
 
 Metrics/ClassLength:
-  Max: 125
-
-Metrics/AbcSize:
-  Enabled: false
+  Max: 120

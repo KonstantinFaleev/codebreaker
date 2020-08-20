@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Codebreaker
   Score = Struct.new(:date, :player_name, :winner, :level, :score) do
     def initialize

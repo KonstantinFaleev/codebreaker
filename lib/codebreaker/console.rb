@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 require 'colorize'
 require 'erb'
+
+# rubocop:disable Metrics/ClassLength
 
 module Codebreaker
   class Console
@@ -7,11 +11,9 @@ module Codebreaker
     include Motivation
     include UserScore
     include Storage
+    include GameConst
 
     DEMO = Game.new('Demo User', 5, 2, :middle, :en)
-    HINT = '-h'.freeze
-    YES = 'y'.freeze
-    EMPTY_INPUT = ''.freeze
 
     attr_reader :game, :scores
 
@@ -59,6 +61,8 @@ module Codebreaker
            end
     end
 
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+
     def user_interaction(input = EMPTY_INPUT)
       return if game.attempts.zero?
 
@@ -78,6 +82,8 @@ module Codebreaker
       end
       input
     end
+
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
     def process(input)
       begin
@@ -153,3 +159,5 @@ module Codebreaker
     end
   end
 end
+
+# rubocop:enable Metrics/ClassLength

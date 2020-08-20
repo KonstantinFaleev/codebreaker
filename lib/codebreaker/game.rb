@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Codebreaker
   GameConfiguration = Struct.new(:player_name, :max_attempts, :max_hints, :level, :lang)
 
@@ -34,6 +36,7 @@ module Codebreaker
       result == TRUE_ANSWER * 4
     end
 
+    # rubocop:disable Metrics/AbcSize
     def hint
       raise message['alerts']['no_hints'] if hints.zero?
 
@@ -45,6 +48,7 @@ module Codebreaker
       end
       not_guessed.compact.sample
     end
+    # rubocop:enable Metrics/AbcSize
 
     def score
       calculate_score
@@ -54,6 +58,7 @@ module Codebreaker
 
     attr_reader :result, :secret_code
 
+    # rubocop:disable Metrics/AbcSize
     def check_configuration
       levels = [SIMPLE_LEVEL, MIDDLE_LEVEL, HARD_LEVEL]
       raise message['errors']['fail_configuration'] if configuration.any?(&:nil?)
@@ -66,6 +71,7 @@ module Codebreaker
         raise message['errors']['fail_configuration_values']
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def create_instance_vars
       @attempts = configuration.max_attempts
@@ -114,6 +120,7 @@ module Codebreaker
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def calculate_score
       attempt_rate, hint_rate = lever_rates
       guessed = result.count(TRUE_ANSWER)
@@ -124,6 +131,7 @@ module Codebreaker
 
       used_attempts * attempt_rate * guessed - used_hints * hint_rate + bonus_points
     end
+    # rubocop:enable Metrics/AbcSize
 
     def lever_rates
       case configuration.level
