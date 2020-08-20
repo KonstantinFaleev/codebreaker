@@ -1,0 +1,16 @@
+require: rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - spec/**/*.rb
+    - vendor/**/*
+    - Gemfile
+    - Rakefile
+    - bin/console
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 120
